@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>案例 · SONGJIAHAO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0d10;
+            color: #eaeef2;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .site-wrapper {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem 2.5rem;
+            background: radial-gradient(circle at 10% 20%, #13171e, #080a0d);
+            min-height: 100vh;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+
+        /* ===== 导航 ===== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0 2.5rem 0;
+            border-bottom: 1px solid rgba(255, 215, 150, 0.15);
+            flex-wrap: wrap;
+            gap: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 300;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: #f0e6d8;
+        }
+
+        .logo i {
+            color: #d4a373;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.8rem;
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            color: #b9c2ce;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #b9c2ce;
+            transition: color 0.2s;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a:hover {
+            color: #e6dacb;
+            border-bottom-color: #d4a373;
+        }
+
+        .nav-links .active {
+            color: #f0e6d8;
+            border-bottom-color: #d4a373;
+        }
+
+        /* ===== 案例头部 ===== */
+        .cases-header {
+            padding: 2rem 0 1.5rem 0;
+        }
+
+        .cases-header .breadcrumb {
+            font-size: 0.8rem;
+            color: #8896a8;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .cases-header .breadcrumb i {
+            color: #d4a373;
+            margin: 0 6px;
+        }
+
+        .cases-header h1 {
+            font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 300;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+        }
+
+        .cases-header h1 strong {
+            font-weight: 600;
+            background: linear-gradient(135deg, #f3e4d3, #d4a373);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cases-header p {
+            color: #bcc6d4;
+            font-weight: 300;
+            font-size: 1.1rem;
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* ===== 精选案例卡片（含嵌入式链接） ===== */
+        .featured-case {
+            margin: 3rem 0 2rem 0;
+            background: rgba(24, 30, 40, 0.55);
+            backdrop-filter: blur(2px);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 2.5rem 2.8rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+
+        .featured-case:hover {
+            border-color: rgba(212, 163, 115, 0.25);
+            background: rgba(32, 40, 52, 0.7);
+            box-shadow: 0 25px 40px -10px #00000055;
+        }
+
+        .featured-case .case-tag {
+            display: inline-block;
+            background: rgba(212, 163, 115, 0.12);
+            color: #d4a373;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: 1px solid rgba(212, 163, 115, 0.15);
+            margin-bottom: 1rem;
+        }
+
+        .featured-case h2 {
+            font-weight: 400;
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-case .case-desc {
+            color: #b0bac9;
+            font-weight: 300;
+            margin-bottom: 1.8rem;
+            max-width: 80%;
+        }
+
+        /* 嵌入式B站链接卡片 */
+        .b站-embed-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            border: 1px solid rgba(212, 163, 115, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .b站-embed-card:hover {
+            border-color: rgba(212, 163, 115, 0.3);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .b站-embed-card .embed-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .b站-embed-card .embed-info i {
+            font-size: 2.4rem;
+            color: #d4a373;
+        }
+
+        .b站-embed-card .embed-info .text h4 {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .b站-embed-card .embed-info .text p {
+            color: #8896a8;
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        .b站-embed-card .embed-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #d4a373;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #0b0d10;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(212, 163, 115, 0.2);
+            white-space: nowrap;
+        }
+
+        .b站-embed-card .embed-link:hover {
+            background: #e2bc8c;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(212, 163, 115, 0.35);
+        }
+
+        /* ===== 案例网格 ===== */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .case-item {
+            background: rgba(24, 30, 40, 0.45);
+            backdrop-filter: blur(2px);
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        .case-item:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 163, 115, 0.2);
+            background: rgba(32, 40, 52, 0.6);
+        }
+
+        .case-item .case-icon {
+            font-size: 2.2rem;
+            color: #d4a373;
+            margin-bottom: 1.2rem;
+        }
+
+        .case-item h3 {
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .case-item .industry {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8896a8;
+            margin-bottom: 0.8rem;
+        }
+
+        .case-item p {
+            color: #b0bac9;
+            font-weight: 300;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ===== 方法/流程 ===== */
+        .method-section {
+            margin: 3rem 0 1rem 0;
+            padding: 2.5rem 2rem;
+            background: rgba(16, 20, 28, 0.4);
+            border-radius: 40px;
+            border: 1px solid rgba(212, 163, 115, 0.06);
+        }
+
+        .method-section h3 {
+            font-weight: 300;
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .method-section h3 strong {
+            color: #d4a373;
+            font-weight: 500;
+        }
+
+        .method-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-top: 1.8rem;
+        }
+
+        .method-step {
+            flex: 1;
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .method-step .step-num {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #d4a373;
+        }
+
+        .method-step .step-text {
+            font-weight: 300;
+            color: #bcc6d4;
+            font-size: 0.95rem;
+        }
+
+        .method-step .step-text strong {
+            color: #f0e6d8;
+            font-weight: 500;
+        }
+
+        /* ===== 页脚 ===== */
+        .footer {
+            margin-top: 3.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 215, 150, 0.07);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            font-size: 0.85rem;
+            color: #6f7c8e;
+        }
+
+        .footer .socials i {
+            font-size: 1.2rem;
+            margin-left: 1.2rem;
+            color: #6f7c8e;
+            transition: color 0.2s;
+            cursor: default;
+        }
+
+        .footer .socials i:hover {
+            color: #d4a373;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .site-wrapper {
+                padding: 1.5rem 1.5rem;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+                padding-bottom: 1.8rem;
+            }
+            .nav-links {
+                gap: 1.8rem;
+                flex-wrap: wrap;
+                font-size: 0.9rem;
+            }
+            .cases-header h1 {
+                font-size: 2.6rem;
+            }
+            .featured-case {
+                padding: 1.8rem 1.5rem;
+            }
+            .featured-case .case-desc {
+                max-width: 100%;
+            }
+            .b站-embed-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .b站-embed-card .embed-link {
+                width: 100%;
+                justify-content: center;
+            }
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+            .method-steps {
+                flex-direction: column;
+            }
+            .footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .footer .socials i {
+                margin: 0 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-wrapper {
+                padding: 1rem 1rem;
+            }
+            .cases-header h1 {
+                font-size: 2.2rem;
+            }
+            .featured-case {
+                padding: 1.2rem 1rem;
+                border-radius: 28px;
+            }
+            .b站-embed-card {
+                padding: 1.2rem;
+            }
+            .b站-embed-card .embed-info i {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="site-wrapper">
+
+    <!-- 导航 -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-gem"></i>
+            <span>SONGJIAHAO</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">首页</a>
+            <a href="services.html">服务</a>
+            <a href="cases.html" class="active">案例</a>
+            <a href="team.html">团队</a>
+            <a href="contact.html">联系</a>
+        </div>
+    </nav>
+
+    <!-- 案例头部 -->
+    <section class="cases-header">
+        <div class="breadcrumb">
+            <i class="fas fa-home"></i> 首页 <i class="fas fa-chevron-right"></i> 案例
+        </div>
+        <h1>精选<strong>案例</strong></h1>
+        <p>从战略到落地，每一个项目都承载着我们对卓越的追求。以下是我们与伙伴共同创造的标杆之作。</p>
+    </section>
+
+    <!-- 精选案例：内嵌B站空间 -->
+    <div class="featured-case">
+        <div class="case-tag"><i class="fas fa-star"></i>  featured</div>
+        <h2>「宋子」品牌合作</h2>
+        <div class="case-desc">
+            深度参与内容创意与视觉升级，助力宋子在平台建立更具辨识度的个人品牌形象。
+        </div>
+
+        <!-- ★★★ 嵌入式B站链接 ★★★ -->
+        <div class="b站-embed-card">
+            <div class="embed-info">
+                <i class="fab fa-bilibili"></i>
+                <div class="text">
+                    <h4>宋子 的B站空间</h4>
+                    <p>探索更多创意内容与项目幕后</p>
+                </div>
+            </div>
+            <a href="https://space.bilibili.com/3546975960042256" target="_blank" class="embed-link">
+                前往空间 <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- 更多案例网格 -->
+    <div class="cases-grid">
+        <div class="case-item">
+            <div class="case-icon"><i class="fas fa-crown"></i></div>
+            <h3>高端腕表品牌重塑</h3>
+            <div class="industry">奢侈品 · 2026</div>
+            <p>从品牌定位到视觉系统全面升级，助力客户在亚太市场实现35%的业绩增长。</p>
+        </div>
+        <div class="case-item">
+            <div class="case-icon"><i class="fas fa-leaf"></i></div>
+            <h3>可持续时尚平台</h3>
+            <div class="industry">零售 · 2026</div>
+            <p>构建线上社区与交易生态，将环保理念转化为商业价值，上线半年用户突破10万。</p>
+        </div>
+        <div class="case-item">
+            <div class="case-icon"><i class="fas fa-rocket"></i></div>
+            <h3>科技独角兽品牌升级</h3>
+            <div class="industry">科技 · 2067</div>
+            <p>为B轮融资后的企业打造全球化品牌叙事，重新定义行业领导力形象。</p>
+        </div>
+    </div>
+
+    <!-- 我们的方法 -->
+    <div class="method-section">
+        <h3>我们的 <strong>工作方法</strong></h3>
+        <div class="method-steps">
+            <div class="method-step">
+                <span class="step-num">01</span>
+                <span class="step-text"><strong>深度倾听</strong> · 理解需求</span>
+            </div>
+            <div class="method-step">
+                <span class="step-num">02</span>
+                <span class="step-text"><strong>策略锚定</strong> · 定义核心</span>
+            </div>
+            <div class="method-step">
+                <span class="step-num">03</span>
+                <span class="step-text"><strong>共创打磨</strong> · 迭代优化</span>
+            </div>
+            <div class="method-step">
+                <span class="step-num">04</span>
+                <span class="step-text"><strong>长效陪伴</strong> · 持续生长</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="copy">
+            <i class="far fa-copyright"></i> 2026 SONGJIAHAO · 高端品牌
+        </div>
+        <div class="socials">
+            <i class="fab fa-linkedin-in"></i>
+            <i class="fab fa-x-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>
